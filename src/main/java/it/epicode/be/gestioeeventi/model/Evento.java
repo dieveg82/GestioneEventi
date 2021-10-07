@@ -28,6 +28,7 @@ import javax.persistence.Table;
 import it.epicode.be.gestioneeventi.util.JpaUtil;
 
 @Entity 
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "Evento")
 @NamedQuery(name ="getAll" , query ="select e from Evento e")
 @NamedQuery(name ="getPubblici" , query ="select e from Evento e where e.tipoEvento like : tipoEvento")
@@ -59,25 +60,16 @@ public class Evento {
 	public Evento() {
 	}
 
-	public Evento(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			int numeroMassimoPartecipanti) {
-		this.id = id;
-		this.titolo = titolo;
-		this.dataEvento = dataEvento;
-		this.descrizione = descrizione;
-		this.tipoEvento = tipoEvento;
-		this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
-	}
 
 	public Evento(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			Integer numeroMassimoPartecipanti) {
+			Integer numeroMassimoPartecipanti ) {
 		this.id = id;
 		this.titolo = titolo;
 		this.dataEvento = dataEvento;
 		this.descrizione = descrizione;
 		this.tipoEvento = tipoEvento;
 		this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
-		this.location = location;
+
 	}
 
 	public Long getId() {

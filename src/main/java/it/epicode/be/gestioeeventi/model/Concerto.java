@@ -1,5 +1,7 @@
 package it.epicode.be.gestioeeventi.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,6 +16,16 @@ public class Concerto extends Evento {
 	private GenereConcerto genere;
 	
 	private Boolean inStreaming;
+
+	public Concerto () {}
+
+	
+
+	public Concerto(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
+			Integer numeroMassimoPartecipanti, Location location) {
+		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti);
+	}
+
 
 
 	public Boolean getInStreaming() {

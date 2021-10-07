@@ -1,9 +1,15 @@
 package it.epicode.be.gestioeeventi.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "getPartiteVinteInCasa", query = "select c from PartitaDiCalcio c where c.squadraVincente =c.squadraDiCasa")
+@NamedQuery(name = "getPartiteVinteInTrasferta", query = "select c from PartitaDiCalcio c where c.squadraVincente =c.squadraOspite")
+@NamedQuery(name = "getPartitePareggiate", query = "select c from PartitaDiCalcio c where c.squadraVincente is null")   // prof non riesco a capire perchè non mi funziona questa query
+
 public class PartitaDiCalcio extends Evento {
 	
 	private String squadraDiCasa;
@@ -14,6 +20,22 @@ public class PartitaDiCalcio extends Evento {
 	public String getSquadraDiCasa() {
 		return squadraDiCasa;
 	}
+	
+	public PartitaDiCalcio () {}
+	
+	
+	public PartitaDiCalcio(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
+			Integer numeroMassimoPartecipanti ,String squadraDiCasa, String squadraOspite, String squadraVincente, 
+			Integer numGolCasa,Integer numGolOspite) {
+		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti);
+		this.squadraDiCasa = squadraDiCasa;
+		this.squadraOspite = squadraOspite;
+		this.squadraVincente = squadraVincente;
+		this.numGolCasa = numGolCasa;
+		this.numGolOspite = numGolOspite;
+	}
+
+
 	public void setSquadraDiCasa(String squadraDiCasa) {
 		this.squadraDiCasa = squadraDiCasa;
 	}
