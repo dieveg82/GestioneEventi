@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "persona")
+@Table(name = "Persona")
 public class Persona {
 
 	@Id
@@ -36,7 +37,7 @@ public class Persona {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Sesso sesso;
-	@OneToMany(mappedBy = "persPart")
+	@OneToMany(mappedBy = "persPart" , cascade = CascadeType.REMOVE)
 	@OrderBy("Evento.dataEvento")
 	private List<Partecipazioni> listPart = new ArrayList<>();
 

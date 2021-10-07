@@ -6,7 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import it.epicode.be.gestioeeventi.model.Concerto;
 import it.epicode.be.gestioeeventi.model.Evento;
+import it.epicode.be.gestioeeventi.model.GenereConcerto;
+import it.epicode.be.gestioeeventi.model.TipoEvento;
 import it.epicode.be.gestioneeventi.util.JpaUtil;
 
 public class EventoDao {
@@ -49,4 +52,55 @@ public class EventoDao {
 			em.close();
 		}
 	}
+	
+	public void selectAll() {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		try {
+			Query query = em.createNamedQuery("getAll");
+			List<Evento> resultList = query.getResultList();
+			for (Evento e1 : resultList) {
+				System.out.println(e1);
+			}
+		} finally {
+			em.close();
+		}
+	}
+	
+	public void selectPublic() {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		try {
+			Query query = em.createNamedQuery("getPubblici");
+			query.setParameter("tipoEvento", TipoEvento.PUBBLICO);
+			List<Evento> resultList = query.getResultList();
+			for (Evento e1 : resultList) {
+				System.out.println(e1);
+			}
+		} finally {
+			em.close();
+		}
+	}
+	
+	public List<Concerto> getConcertiInStreaming(Boolean inStreaming) {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		try {
+			Query query = em.createNamedQuery("concertiInStreaming");
+			query.setParameter("streaming", inStreaming);
+			return query.getResultList();
+		} finally {
+			em.close();
+		}
+	}
+
+	public List<Concerto> getConcertiPerGenere(List<GenereConcerto> listaGeneri) {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		try {
+			Query query = em.createNamedQuery("concertiPerGenere");
+			query.setParameter("listagenere", listaGeneri);
+			return query.getResultList();
+		} finally {
+			em.close();
+		}
+	}
+
+	
 }

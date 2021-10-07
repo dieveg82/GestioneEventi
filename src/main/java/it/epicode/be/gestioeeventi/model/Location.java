@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity 
-@Table (name ="location")
+@Table (name ="Location")
 public class Location {
 
 	@Id 

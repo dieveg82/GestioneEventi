@@ -1,9 +1,12 @@
 package it.epicode.be.gestioneeventi.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
-import it.epicode.be.gestioeeventi.model.Location;
 import it.epicode.be.gestioeeventi.model.Partecipazioni;
 import it.epicode.be.gestioneeventi.util.JpaUtil;
 
@@ -48,4 +51,13 @@ public class PartecipazioniDao {
 		}
 	}
 	
+	public List selectAll () {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		List<Partecipazioni> listPart = new ArrayList<>();
+		try {
+		Query query = em.createQuery("select p from Partecipazioni p");
+		listPart = query.getResultList();
+		} finally {em.close();}
+		return listPart;	
+	}
 }

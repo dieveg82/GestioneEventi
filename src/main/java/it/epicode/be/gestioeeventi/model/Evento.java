@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -13,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,10 +27,11 @@ import javax.persistence.Table;
 
 import it.epicode.be.gestioneeventi.util.JpaUtil;
 
-@Entity
+@Entity 
 @Table(name = "Evento")
 @NamedQuery(name ="getAll" , query ="select e from Evento e")
 @NamedQuery(name ="getPubblici" , query ="select e from Evento e where e.tipoEvento like : tipoEvento")
+
 
 public class Evento {
 
@@ -47,7 +51,7 @@ public class Evento {
 	private TipoEvento tipoEvento;
 	@Column
 	private Integer numeroMassimoPartecipanti;
-	@OneToMany(mappedBy = "evenPart")
+	@OneToMany(mappedBy = "evenPart" ,cascade = CascadeType.REMOVE)
 	private Set<Partecipazioni> setPartecipazioni = new HashSet<>();
 	@OneToOne
 	private Location location;
@@ -148,35 +152,6 @@ public class Evento {
 	public String toString() {
 		return "Evento [id=" + id + ", titolo=" + titolo + ", dataEvento=" + dataEvento + ", descrizione=" + descrizione
 				+ ", tipoEvento=" + tipoEvento + ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti + "]";
-	}
-
-	
-	
-	public void selectAll() {
-		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-		try {
-			Query query = em.createNamedQuery("getAll");
-			List<Evento> resultList = query.getResultList();
-			for (Evento e1 : resultList) {
-				System.out.println(e1);
-			}
-		} finally {
-			em.close();
-		}
-	}
-	
-	public void selectPublic() {
-		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-		try {
-			Query query = em.createNamedQuery("getPubblici");
-			query.setParameter("tipoEvento", "tipoEvento.PUBBLICO");
-			List<Evento> resultList = query.getResultList();
-			for (Evento e1 : resultList) {
-				System.out.println(e1);
-			}
-		} finally {
-			em.close();
-		}
 	}
 
 }

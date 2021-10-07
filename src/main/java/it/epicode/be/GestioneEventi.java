@@ -2,6 +2,8 @@ package it.epicode.be;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.epicode.be.gestioeeventi.model.Evento;
 import it.epicode.be.gestioeeventi.model.Location;
@@ -43,9 +45,15 @@ public class GestioneEventi {
 //		Partecipazioni par1 = new Partecipazioni(null, p1, e1, Stato.CONFERMATA);
 //		PartecipazioniDao parDao = new PartecipazioniDao();
 //		parDao.save(par1);
-		Evento e = new Evento ();
+		EventoDao e = new EventoDao ();
 		e.selectAll();
 		e.selectPublic();
+		Persona p = new Persona ();
+		PartecipazioniDao parDao = new PartecipazioniDao();
+		p.setListPart(parDao.selectAll());
+		for (Partecipazioni pa : p.getListPart()) {
+			System.out.println(pa);
+		}
 		
 		
 	}

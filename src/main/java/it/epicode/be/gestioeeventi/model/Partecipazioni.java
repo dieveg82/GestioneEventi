@@ -1,22 +1,31 @@
 package it.epicode.be.gestioeeventi.model;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Query;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import it.epicode.be.gestioneeventi.util.JpaUtil;
+
 @Entity 
-@Table (name = "partecipazioni")
+@Table (name = "Partecipazioni")
+@NamedQuery (name = "selectAll" , query = "select p from Partecipazioni p ")
 public class Partecipazioni {
 	
 	@Id 
@@ -80,6 +89,21 @@ public class Partecipazioni {
 		return "Partecipazioni [id=" + id + ", persPart=" + persPart + ", evenPart=" + evenPart + ", stato=" + stato
 				+ "]";
 	}
-
 	
+	public List selectAll () {
+		EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+		try {
+			Query query = em.createNamedQuery("selectAll");
+			List<Partecipazioni> resultList = (List<Partecipazioni>) query.getResultList();
+			for (Partecipazioni e1 : resultList) {
+				System.out.println(e1);
+				return resultList;
+				
+			}
+		} finally {
+			em.close();
+		}
+		return null;
+	}
+		
 }
