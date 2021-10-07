@@ -25,9 +25,9 @@ public class PartitaDiCalcio extends Evento {
 	
 	
 	public PartitaDiCalcio(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			Integer numeroMassimoPartecipanti ,String squadraDiCasa, String squadraOspite, String squadraVincente, 
+			Integer numeroMassimoPartecipanti ,Location location,String squadraDiCasa, String squadraOspite, String squadraVincente, 
 			Integer numGolCasa,Integer numGolOspite) {
-		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti);
+		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti ,location);
 		this.squadraDiCasa = squadraDiCasa;
 		this.squadraOspite = squadraOspite;
 		this.squadraVincente = squadraVincente;

@@ -35,27 +35,24 @@ public class GestioneEventi {
 		Location l1 = new Location(null,"Stadio","Milano");
 		LocationDao ldao = new LocationDao();
 		ldao.save(l1);
-		Evento e1 = new Evento(null, "partita", new Date (), "italia vs spagna", TipoEvento.PUBBLICO, 100);
-		e1.setLocation(l1);
+		Evento e1 = new Evento(null, "partita", new Date (), "italia vs spagna", TipoEvento.PUBBLICO, 100,l1);
 		EventoDao edao = new EventoDao();
 		edao.save(e1);
 
 		Location l2 = new Location(null,"Stadio","Milano");
 		ldao.save(l2);
-		Evento e2 = new Evento(null, "partita", new Date (), "italia vs germania", TipoEvento.PUBBLICO, 100);
-		e2.setLocation(l2);
+		Evento e2 = new Evento(null, "partita", new Date (), "italia vs germania", TipoEvento.PUBBLICO, 100,l2);
 		edao.save(e2);
 		
 		Location l3 = new Location(null,"Stadio","Milano");
 		ldao.save(l3);
-		Evento e3 = new Evento(null, "partita", new Date (), "italia vs svizzera", TipoEvento.PUBBLICO, 100);
-		e3.setLocation(l3);
+		Evento e3 = new Evento(null, "partita", new Date (), "italia vs svizzera", TipoEvento.PUBBLICO, 100,l3);
 		edao.save(e3);
 		
 		
-		PartitaDiCalcio p1 = new PartitaDiCalcio(null, e1.getTitolo(), e1.getDataEvento(),e1.getDescrizione() ,e1.getTipoEvento(), e1.getNumeroMassimoPartecipanti() ,"italia", "spagna", "null", 0, 0);
-		PartitaDiCalcio p2 = new PartitaDiCalcio(null, e2.getTitolo(), e2.getDataEvento(),e2.getDescrizione() ,e2.getTipoEvento(), e2.getNumeroMassimoPartecipanti() ,"italia", "germania", "italia", 2, 1);
-		PartitaDiCalcio p3 = new PartitaDiCalcio(null, e3.getTitolo(), e3.getDataEvento(),e3.getDescrizione() ,e3.getTipoEvento(), e3.getNumeroMassimoPartecipanti() ,"italia", "svizzera", "svizzera", 1, 2);
+		PartitaDiCalcio p1 = new PartitaDiCalcio(null, e1.getTitolo(), e1.getDataEvento(),e1.getDescrizione() ,e1.getTipoEvento(), e1.getNumeroMassimoPartecipanti() ,e1.getLocation(),"italia", "spagna", "null", 0, 0);
+		PartitaDiCalcio p2 = new PartitaDiCalcio(null, e2.getTitolo(), e2.getDataEvento(),e2.getDescrizione() ,e2.getTipoEvento(), e2.getNumeroMassimoPartecipanti() ,e2.getLocation(),"italia", "germania", "italia", 2, 1);
+		PartitaDiCalcio p3 = new PartitaDiCalcio(null, e3.getTitolo(), e3.getDataEvento(),e3.getDescrizione() ,e3.getTipoEvento(), e3.getNumeroMassimoPartecipanti() ,e3.getLocation(),"italia", "svizzera", "svizzera", 1, 2);
 
 		PartitaDiCalcioDao pDao = new PartitaDiCalcioDao();	
 		pDao.save(p1);
@@ -71,8 +68,7 @@ public class GestioneEventi {
 		
 		Location l4 = new Location(null,"Stadio","Roma");
 		ldao.save(l4);
-		Evento e4 = new Evento(null, "gara Atletia", new Date (), "100 metri", TipoEvento.PUBBLICO, 50);
-		e4.setLocation(l4);
+		Evento e4 = new Evento(null, "gara Atletia", new Date (), "100 metri", TipoEvento.PUBBLICO, 50 , l4);
 		edao.save(e4);
 		Partecipazioni par1Partecipazioni = new Partecipazioni(null, per1, e4, Stato.CONFERMATA);
 		PartecipazioniDao parDao = new PartecipazioniDao ();
@@ -82,7 +78,7 @@ public class GestioneEventi {
 		
 		
 		
-		GaraDiAtletica gara1 = new GaraDiAtletica(null, e4.getTitolo(), e4.getDataEvento(), e4.getDescrizione(), TipoEvento.PRIVATO, 50);
+		GaraDiAtletica gara1 = new GaraDiAtletica(null, e4.getTitolo(), e4.getDataEvento(), e4.getDescrizione(), TipoEvento.PRIVATO, 50,l4);
 		gara1.setVincitore(per1);
 		Set<Persona> setPersona = new HashSet<>();
 		setPersona.add(per1);

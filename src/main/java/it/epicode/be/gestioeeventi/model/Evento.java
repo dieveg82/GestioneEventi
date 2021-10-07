@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -54,23 +55,30 @@ public class Evento {
 	private Integer numeroMassimoPartecipanti;
 	@OneToMany(mappedBy = "evenPart" ,cascade = CascadeType.REMOVE)
 	private Set<Partecipazioni> setPartecipazioni = new HashSet<>();
-	@OneToOne
+	@ManyToOne
 	private Location location;
 
 	public Evento() {
 	}
 
 
+	
+
 	public Evento(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			Integer numeroMassimoPartecipanti ) {
+			Integer numeroMassimoPartecipanti, Location location) {
+		super();
 		this.id = id;
 		this.titolo = titolo;
 		this.dataEvento = dataEvento;
 		this.descrizione = descrizione;
 		this.tipoEvento = tipoEvento;
 		this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
-
+		this.location = location;
+		this.setPartecipazioni = setPartecipazioni
 	}
+
+
+
 
 	public Long getId() {
 		return id;

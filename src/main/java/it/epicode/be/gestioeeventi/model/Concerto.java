@@ -21,10 +21,10 @@ public class Concerto extends Evento {
 
 	
 
-	public Concerto(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			Integer numeroMassimoPartecipanti, Location location) {
-		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti);
-	}
+//	public Concerto(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
+//			Integer numeroMassimoPartecipanti, Location location) {
+//		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti);
+//	}
 
 
 

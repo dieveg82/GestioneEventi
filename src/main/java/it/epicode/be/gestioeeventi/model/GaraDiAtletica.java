@@ -29,11 +29,10 @@ public class GaraDiAtletica extends Evento {
 	public GaraDiAtletica () {}
 	
 	
-	
 
 	public GaraDiAtletica(Long id, String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento,
-			Integer numeroMassimoPartecipanti) {
-		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti );
+			Integer numeroMassimoPartecipanti, Location location) {
+		super(id, titolo, dataEvento, descrizione, tipoEvento, numeroMassimoPartecipanti, location);
 	}
 
 	public Set<Persona> getSetAtleti() {
